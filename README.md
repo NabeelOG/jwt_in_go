@@ -143,7 +143,7 @@ Also sets cookie:
 - `Authorization=<jwt-token>`
 - HttpOnly: `true`
 - SameSite: `Lax`
-- Max-Age: `30 days`
+- Max-Age: `2592000` seconds (`30 days`)
 
 #### Error Response (400)
 
