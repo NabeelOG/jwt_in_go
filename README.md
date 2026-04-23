@@ -36,6 +36,7 @@ SECRET=replace-with-your-jwt-secret
 
 ### Notes
 
+- `PORT` exists in `.env`, but the current code uses `r.Run()` with no port argument, so it listens on `:8080`.
 - `DB` is the Postgres DSN used by GORM.
 - `SECRET` is used to sign and validate JWTs.
 
