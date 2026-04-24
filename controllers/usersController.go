@@ -17,13 +17,15 @@ func SignUp(c *gin.Context) {
 	var body struct {
 		Email    string
 		Password string
+		Role     string `json:"role"`
+		Name     string `json:"name"`
 	}
 
 	if c.Bind(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to read body",
+			"error1": "Failed to read body",
+			"error2": "Missing required fields: email, password, role, name",
 		})
-
 		return
 	}
 
@@ -33,19 +35,17 @@ func SignUp(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to hash password",
 		})
-
 		return
 	}
 
 	// Create the user
-	user := models.User{Email: body.Email, Password: string(hash)}
+	user := models.User{Email: body.Email, Password: string(hash), Role: body.Role, Name: body.Name}
 	result := initializers.DB.Create(&user)
 
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to create user",
 		})
-
 		return
 	}
 
